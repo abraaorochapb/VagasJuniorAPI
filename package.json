@@ -12,6 +12,10 @@
   "name": "backendvagasjunior",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": ">=18",
+    "npm": ">=8.0.0"
+  },
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "abbrev": "^1.1.1",
@@ -126,7 +130,9 @@
     "yaml": "^2.3.4"
   },
   "scripts": {
-    "dev": "tsx src/server.ts"
+    "dev": "tsx src/server.ts",
+    "build": "tsup src",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",

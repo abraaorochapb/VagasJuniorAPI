@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Vaga {
-  id String @id @default(cuid()) @db.Uuid
+  id String @id @default(cuid())
   titulo String
   descricao String
   setor String
