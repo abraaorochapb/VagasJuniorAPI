@@ -44,3 +44,13 @@ export const getVagasBySetor = async (req: Request, res: Response) => {
   
     return res.json(vagas);
 };
+
+export const deleteVaga = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await prisma.vaga.delete({
+      where: {
+        id: String(id),
+      },
+    });
+    return res.status(204).send();
+}
