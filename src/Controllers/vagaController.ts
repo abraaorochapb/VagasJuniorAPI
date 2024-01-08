@@ -54,3 +54,24 @@ export const deleteVaga = async (req: Request, res: Response) => {
     });
     return res.status(204).send();
 }
+
+export const updateVaga = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const createVagaSchema = z.object({
+      titulo: z.string(),
+      descricao: z.string(),
+      setor: z.string(),
+    })
+  const {titulo, descricao, setor} = createVagaSchema.parse(req.body)
+    await prisma.vaga.update({
+      where: {
+        id: String(id),
+      },
+      data: {
+        titulo,
+        descricao,
+        setor
+      },
+    });
+    return res.status(204).send();
+}
