@@ -1,10 +1,8 @@
 import express, { Request, Response} from 'express';
-import { PrismaClient } from '@prisma/client';
-import { z } from 'zod';
+import vagaRoutes from './Routes/vagaRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const prisma = new PrismaClient();
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Server is up and running!');
@@ -15,44 +13,5 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
+app.use(vagaRoutes);
 
-app.get('/vagas', async (req: Request, res: Response) => {
-    const vagas = await prisma.vaga.findMany();
-    return res.json(vagas)
-})
-
-app.post('/postarvaga', async (req: Request, res: Response) => {
-    const createVagaSchema = z.object({
-        titulo: z.string(),
-        descricao: z.string(),
-        setor: z.string(),
-    })
-    const {titulo, descricao, setor} = createVagaSchema.parse(req.body)
-    await prisma.vaga.create({
-        data: {
-        titulo,
-        descricao, 
-        setor
-        }
-    })
-    return res.status(201).send()
-})
-
-app.get('/vagas/setor', async (req: Request, res: Response) => {
-  const setor = req.query.setor as string;
-
-  if (!setor) {
-    return res.status(400).json({ error: 'O parâmetro setor é obrigatório.' });
-  }
-
-  const vagas = await prisma.vaga.findMany({
-    where: {
-      setor: {
-        contains: setor,
-        mode: 'insensitive',
-      }
-    }
-  });
-
-  return res.json(vagas);
-});
