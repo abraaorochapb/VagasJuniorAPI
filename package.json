@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.5",
     "nodemon": "^3.0.2",
@@ -35,6 +36,7 @@
     "color-name": "^1.1.4",
     "commander": "^4.1.1",
     "concat-map": "^0.0.1",
+    "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
     "debug": "^4.3.4",
     "dir-glob": "^3.0.1",
