@@ -48,14 +48,20 @@ export const getVagasBySetor = async (req: Request, res: Response) => {
 };
 
 export const deleteVaga = async (req: Request, res: Response) => {
-    const { id } = req.body;
+  const { id } = req.params;
+  try {
     await prisma.vaga.delete({
       where: {
         id: String(id),
       },
     });
-    return res.status(204).send();
-}
+    return res.status(200).send();
+  } catch (error) {
+    console.error('Erro ao excluir a vaga:', error);
+    return res.status(500).json({ error: 'Erro interno ao excluir a vaga' });
+  }
+};
+
 
 export const updateVaga = async (req: Request, res: Response) => {
     const { id } = req.params;
