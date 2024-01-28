@@ -13,4 +13,5 @@ model Vaga {
   titulo String
   descricao String
   setor String
+  vaga_link String
 }

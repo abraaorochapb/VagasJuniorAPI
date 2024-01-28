@@ -14,13 +14,15 @@ export const createVaga = async (req: Request, res: Response) => {
         titulo: z.string(),
         descricao: z.string(),
         setor: z.string(),
+        vaga_link: z.string()
     })
-    const {titulo, descricao, setor} = createVagaSchema.parse(req.body)
+    const {titulo, descricao, setor, vaga_link} = createVagaSchema.parse(req.body)
     await prisma.vaga.create({
         data: {
         titulo,
         descricao, 
-        setor
+        setor,
+        vaga_link
         }
     })
     return res.status(201).send()
@@ -61,8 +63,9 @@ export const updateVaga = async (req: Request, res: Response) => {
       titulo: z.string(),
       descricao: z.string(),
       setor: z.string(),
+      vaga_link: z.string()
     })
-  const {titulo, descricao, setor} = createVagaSchema.parse(req.body)
+  const {titulo, descricao, setor,vaga_link} = createVagaSchema.parse(req.body)
     await prisma.vaga.update({
       where: {
         id: String(id),
@@ -70,7 +73,8 @@ export const updateVaga = async (req: Request, res: Response) => {
       data: {
         titulo,
         descricao,
-        setor
+        setor,
+        vaga_link
       },
     });
     return res.status(204).send();
